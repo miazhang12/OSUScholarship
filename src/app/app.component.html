@@ -1,20 +1,59 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<!--Search box-->
+<div class="search-container my-auto">
+  <input ngModel required #searchText="ngModel" placeholder="search" class="form-control">
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<!--each scholarship-->
+<div style="margin-top: 10px;">
+  <div *ngFor="let scholarship of scholarships | filter: searchText.value">
+    <div id="scholarship" class="bg-white rounded">
+      <h4> {{scholarship.name}} </h4>
+      <p class="lead pl-3"> {{scholarship.award.desc}} </p>
+      <p class="bg-light p-2 border rounded" *ngIf="scholarship.howToApply!=''">HOW TO APPLY: <br>{{scholarship.howToApply}}</p>
+      <ul>
+        <li class="m-0">
+          <p *ngIf="scholarship.award.deadline!=''; else noDeadline"> Deadline: {{scholarship.award.deadline}}</p>
+          <ng-template #noDeadline><p>Deadline not specified</p></ng-template>
+        </li>
+        <li class="m-0">
+          <p *ngIf="scholarship.award.amount!=''; else noAmount" >Amount: {{scholarship.award.amount}} </p>
+          <ng-template #noAmount><p>Amount not specified</p></ng-template>
+        </li>
+      </ul>
+      <!--<div class="row justify-content-around">
+        <div class="col-md-3 offset-md-1">
+          <p *ngIf="scholarship.award.deadline!=''; else noDeadline"> Deadline: <br>{{scholarship.award.deadline}}</p>
+          <ng-template #noDeadline><p>Deadline not specified</p></ng-template>
+        </div>
+        <div class="col-md-4 offset-md-1">
+          <p *ngIf="scholarship.award.amount!=''; else noAmount" >Amount: <br>{{scholarship.award.amount}} </p>
+          <ng-template #noAmount><p>Amount not specified</p></ng-template>
+        </div>
+        <div class="col-md-3 offset-md-1">
+          <p *ngIf="scholarship.award.major!=''; else noMajor" >Major: <br>{{scholarship.award.criteria.major}} </p>
+          <ng-template #noMajor><p>Amount not specified</p></ng-template>
+        </div>
+      </div>-->
+      <div class="d-flex flex-row">
+        <div *ngIf="scholarship.award.types.aidTypes!=''" class="bg-primary text-white p-1 m-1">{{scholarship.award.types.aidTypes}}</div>
+        <div *ngIf="scholarship.award.criteria.FAFSA" class="bg-success text-white p-1 m-1">FAFSA</div>
+        <div *ngIf="scholarship.award.criteria.essay" class="bg-warning text-white p-1 m-1">essay</div>
+        <div *ngIf="scholarship.award.criteria.rec" class="bg-danger text-white p-1 m-1">Reference/Recommendation</div>
+      </div>
+      <div class="d-flex flex-row-reverse">
+        <div *ngIf="(scholarship.contactInfo.name!='' || scholarship.contactInfo.phone!='' || scholarship.contactInfo.email!='' || scholarship.contactInfo.other!='')"
+             class="bg-light m-1 p-1 border border-dark rounded" data-toggle="collapse" [attr.data-target]="'#' + scholarship.id + 'contactBox'" aria-expanded="false" aria-controls="contactInfoBox">
+          <a href="#" class="text-dark">Show Contact Info</a></div>
+        <div *ngIf="scholarship.urlApply!=''" class="bg-light m-1 p-1 border border-danger rounded"><a href="{{scholarship.urlApply}}" class="text-danger" target="_blank">Click To Apply</a></div>
+        <div *ngIf="scholarship.urlInfo!=''" class="bg-light m-1 p-1 border border-primary rounded"><a href="{{scholarship.urlInfo}}" target="_blank">Click For Info</a></div>
+      </div>
+      <div class="collapse" [attr.id]="scholarship.id + 'contactBox'">
+        <div class="card card-block p-2">
+          <tr *ngIf="scholarship.contactInfo.name!=''">Name: {{scholarship.contactInfo.name}}</tr>
+          <tr *ngIf="scholarship.contactInfo.phone!=''">Phone: {{scholarship.contactInfo.phone}}</tr>
+          <tr *ngIf="scholarship.contactInfo.email!=''">Email: {{scholarship.contactInfo.email}}</tr>
+          <tr *ngIf="scholarship.contactInfo.other!=''">Other Info: {{scholarship.contactInfo.other}}</tr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

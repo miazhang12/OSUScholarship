@@ -2,13 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>OSUScholarship</title>
-  <base href="/">
-
+  <title>All OSU Scholarships At One Place</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <style type="text/css">
+    body {
+      padding-top: 30px;
+      padding-bottom: 40px;
+    }
+    .sidebar-nav {
+      padding: 9px 0;
+    }
+  </style>
 </head>
-<body>
-  <app-root></app-root>
+
+<body style="background-color: #e6e6e6">
+<div style="margin-right: 20px">
+  <h1 class="text-right site-title">Scholarships at The Ohio State University</h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+      <div id="filterBox" class="bg-white nav nav-pills flex-column rounded">
+        <h5 class="nav-header">Filter</h5>
+        <div ngModel required #amount="ngModel" class="form-group" style="margin: 3px; border-bottom: 1px solid black">
+          <p style="margin-bottom: 0px">Amount</p>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> $0-500</label>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> $501-1000</label>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> $1001-5000</label>
+        </div>
+        <div ngModel required #gpa="ngModel" class="form-group" style="margin: 3px; border-bottom: 1px solid black">
+          <p style="margin-bottom: 0px">GPA</p>
+          <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="radio" value="option1"> 3.6-4.0</label></div>
+          <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="radio" value="option2"> 3.2-3.6</label></div>
+          <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="radio" value="option2"> 2.8-3.2</label></div>
+          <!--<label class="form-check-label"><input class="form-check-input" type="radio" value=""> 3.6-4.0</label>
+          <label class="form-check-label"><input class="form-check-input" type="radio" value=""> 3.2-3.6</label>
+          <label class="form-check-label"><input class="form-check-input" type="radio" value=""> 2.8-3.2</label>-->
+        </div>
+        <div ngModel required #deadline="ngModel" class="form-group" style="margin: 3px; border-bottom: 1px">
+          <p style="margin-bottom: 0px">Deadline</p>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> Nov 2017</label>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> Dec 2017</label>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> Jan 2018</label>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> Feb 2018</label>
+          <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> Mar 2018</label>
+        </div>
+        <!--<div class="form-check">
+          <p data-toggle="collapse" aria-expanded="false"><a href="#">Deadline</a></p>
+          <div class="collapse">
+            <div class="card card-block p-2">
+              <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> Nov 2017</label>
+              <label class="form-check-label"><input class="form-check-input" type="checkbox" value=""> Dec 2017</label>
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </nav>
+    <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+      <app-root></app-root>
+    </main>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<!--<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
 </body>
 </html>

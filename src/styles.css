@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+#scholarship{
+  margin-bottom: 10px;
+  padding: 10px 5px 5px 10px;
+}
+#filterBox{
+  padding: 10px 5px 5px 10px;
+}
+.item-features {
+  display: none;
+  list-style: inside disc;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  height: 4.06em;
+  overflow: hidden
+}
