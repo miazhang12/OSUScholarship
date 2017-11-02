@@ -1,7 +1,20 @@
 <!--Search box-->
-<div class="search-container my-auto">
-  <input ngModel required #searchText="ngModel" placeholder="search" class="form-control">
+<div class="row">
+  <div class="search-container my-auto col-10">
+    <input ngModel required #searchText="ngModel" placeholder="search scholarship" class="form-control">
+  </div>
+  <div class="dropdown col-2">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Order By
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Deadline</a>
+      <a class="dropdown-item" href="#">Name</a>
+      <a class="dropdown-item" href="#">Amount</a>
+    </div>
+  </div>
 </div>
+
 <!--each scholarship-->
 <div style="margin-top: 10px;">
   <div *ngFor="let scholarship of scholarships | filter: searchText.value">
@@ -9,32 +22,19 @@
       <h4> {{scholarship.name}} </h4>
       <p class="lead pl-3"> {{scholarship.award.desc}} </p>
       <p class="bg-light p-2 border rounded" *ngIf="scholarship.howToApply!=''">HOW TO APPLY: <br>{{scholarship.howToApply}}</p>
-      <ul>
-        <li class="m-0">
-          <p *ngIf="scholarship.award.deadline!=''; else noDeadline"> Deadline: {{scholarship.award.deadline}}</p>
-          <ng-template #noDeadline><p>Deadline not specified</p></ng-template>
+      <ul style="color: #696969">
+        <li>
+          <span *ngIf="scholarship.award.deadline!=''; else noDeadline"> Deadline: {{scholarship.award.deadline}}</span>
+          <ng-template #noDeadline><span>Deadline not specified</span></ng-template>
         </li>
-        <li class="m-0">
-          <p *ngIf="scholarship.award.amount!=''; else noAmount" >Amount: {{scholarship.award.amount}} </p>
-          <ng-template #noAmount><p>Amount not specified</p></ng-template>
+        <li>
+          <span *ngIf="scholarship.award.amount!=''; else noAmount" >{{scholarship.award.amount}} </span>
+          <ng-template #noAmount><span>Amount not specified</span></ng-template>
         </li>
       </ul>
-      <!--<div class="row justify-content-around">
-        <div class="col-md-3 offset-md-1">
-          <p *ngIf="scholarship.award.deadline!=''; else noDeadline"> Deadline: <br>{{scholarship.award.deadline}}</p>
-          <ng-template #noDeadline><p>Deadline not specified</p></ng-template>
-        </div>
-        <div class="col-md-4 offset-md-1">
-          <p *ngIf="scholarship.award.amount!=''; else noAmount" >Amount: <br>{{scholarship.award.amount}} </p>
-          <ng-template #noAmount><p>Amount not specified</p></ng-template>
-        </div>
-        <div class="col-md-3 offset-md-1">
-          <p *ngIf="scholarship.award.major!=''; else noMajor" >Major: <br>{{scholarship.award.criteria.major}} </p>
-          <ng-template #noMajor><p>Amount not specified</p></ng-template>
-        </div>
-      </div>-->
       <div class="d-flex flex-row">
         <div *ngIf="scholarship.award.types.aidTypes!=''" class="bg-primary text-white p-1 m-1">{{scholarship.award.types.aidTypes}}</div>
+        <div *ngIf="scholarship.award.criteria.degree!=''" class="bg-info text-white p-1 m-1">{{scholarship.award.criteria.degree}}</div>
         <div *ngIf="scholarship.award.criteria.FAFSA" class="bg-success text-white p-1 m-1">FAFSA</div>
         <div *ngIf="scholarship.award.criteria.essay" class="bg-warning text-white p-1 m-1">essay</div>
         <div *ngIf="scholarship.award.criteria.rec" class="bg-danger text-white p-1 m-1">Reference/Recommendation</div>
