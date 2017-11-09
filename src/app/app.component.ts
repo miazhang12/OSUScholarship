@@ -9,6 +9,11 @@ import { DataService } from './service/data.service';
 export class AppComponent implements OnInit{
   // title = 'app';
   scholarships: Scholarship[];
+  public orderByField;
+  public setOrderBy = (field) => {  
+    if (this.orderByField === field) return;
+    this.orderByField = field;
+  }
 
   constructor(private dataService: DataService) {}
 
@@ -16,6 +21,7 @@ export class AppComponent implements OnInit{
     this.dataService.getJSON().subscribe((scholarships) => {
       this.scholarships = scholarships.data.scholarships;
     });
+	this.setOrderBy('name');
   }
 }
 

@@ -3,21 +3,21 @@
   <div class="search-container my-auto col-10">
     <input ngModel required #searchText="ngModel" placeholder="search scholarship" class="form-control">
   </div>
-  <div class="dropdown col-2">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Order By
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Deadline</a>
-      <a class="dropdown-item" href="#">Name</a>
-      <a class="dropdown-item" href="#">Amount</a>
-    </div>
+  <div class="btn-group" dropdown>
+  <button dropdownToggle type="button" class="btn btn-secondary dropdown-toggle">
+    Order By <span class="caret"></span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li role="menuitem"><a class="dropdown-item" href="#" (click)="setOrderBy('name')">Name</a></li>
+    <li role="menuitem"><a class="dropdown-item" href="#" (click)="setOrderBy('award.deadline')">Deadline</a></li>
+    <li role="menuitem"><a class="dropdown-item" href="#" (click)="setOrderBy('award.amount')">Amount</a></li>
+  </ul>
   </div>
 </div>
 
 <!--each scholarship-->
 <div style="margin-top: 10px;">
-  <div *ngFor="let scholarship of scholarships | filter: searchText.value">
+  <div *ngFor="let scholarship of scholarships | filter: searchText.value | sort: orderByField">
     <div id="scholarship" class="bg-white rounded">
       <h4> {{scholarship.name}} </h4>
       <p class="lead pl-3"> {{scholarship.award.desc}} </p>
